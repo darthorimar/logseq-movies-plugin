@@ -3,7 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <title>Logseq Movies</title>
-<body>
+    <style>
+        :root {
+            --shadow: SPECIFIED_IN_THEME;
+            --hover: SPECIFIED_IN_THEME;
+            --background: SPECIFIED_IN_THEME;
+            --text: SPECIFIED_IN_THEME;
+            --active: SPECIFIED_IN_THEME;
+        }
 
+        #item-chooser {
+            position: absolute;
+            background-color: var(--background);
+            width: 300px;
+            font-family: sans-serif;
+            overflow: hidden;
+            color: var(--text);
+            box-shadow: 1px 1px 6px 0 var(--shadow);
+        }
+
+
+         #item-chooser input::placeholder {
+            color: var(--text);
+            font-family: sans-serif;
+        }
+
+        #item-chooser input {
+            background-color: var(--background);
+            width: 100%;
+            padding: 0 0 0 32px;
+            height: 32px;
+            border: none;
+            outline: none;
+            color: var(--text);
+        }
+
+        #search-icon {
+            display: block;
+            position: absolute;
+            padding: 2px 6px 6px;
+            width: 24px;
+            height: 24px;
+            user-select: none;
+        }
+
+        #completion-list {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        #completion-list li {
+            display: block;
+            user-select: none;
+            padding: 6px 32px;
+            cursor: pointer;
+            color: var(--text);
+        }
+
+        #completion-list li:hover {
+            background-color: var(--hover);
+            color: var(--text);
+        }
+
+        .active {
+            background-color: var(--active);
+            color: var(--text);
+        }
+    </style>
+
+<body>
+<div id="item-chooser">
+    <span id="search-icon"></span>
+    <input id="search-box" placeholder="" type="text">
+    <ul id="completion-list"></ul>
+</div>
 </body>
 </html>

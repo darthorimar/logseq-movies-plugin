@@ -1,25 +1,30 @@
 {
-  "name": "logseq-movies",
+  "name": "logseq-plugin-movies",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.html",
-  "scripts": {
-    "dev": " webpack  --mode=development",
-    "build": " webpack  --mode=production"
-  },
+  "description": "A Logseq plugin that helps you insert your favorite anime and movie titles into your documents",
   "author": "Ilya Kirillov",
   "license": "MIT",
+  "main": "dist/index.html",
+  "scripts": {
+    "dev": " webpack --mode=development",
+    "build": "webpack --mode=production"
+  },
   "devDependencies": {
     "@types/node": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.30.4",
     "@typescript-eslint/parser": "^5.30.4",
     "eslint": "^8.19.0",
     "html-webpack-plugin": "^5.5.0",
+    "ts-loader": "^9.3.1",
     "typescript": "^4.7.4",
     "webpack": "^5.73.0",
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
     "@logseq/libs": "^0.0.6"
+  },
+  "logseq": {
+    "id": "logseq-plugin-movies",
+    "title": "Movies"
   }
 }

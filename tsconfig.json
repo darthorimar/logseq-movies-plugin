@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
+    "strict": true,
     "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "noImplicitReturns": true,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "Node",
     "target": "ES2015",

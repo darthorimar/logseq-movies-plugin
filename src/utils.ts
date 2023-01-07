@@ -12,14 +12,14 @@ export function tokenize(text: string): string {
 }
 
 /**
- * Insert `Item` as a link inside block
- * @param block logseq block to insert the item
+ * Insert `Item` as a link inside a current block at cursor position
  * @param item item to insert into the block
  * @param icon icon to before `Item` title
+ * @param format format of the link to insert, possible values are `markdown` and `org`
  */
-export async function insertItemToBlock(block: BlockEntity, item: Item, icon: string | null): Promise<void> {
-    const link = createLink(item, icon, block.format)
-    await logseq.Editor.updateBlock(block.uuid, block.content + link)
+export async function insertItemAtCursor(item: Item, icon: string | null, format: Format): Promise<void> {
+    const link = createLink(item, icon, format)
+    await logseq.Editor.insertAtEditingCursor(link)
 }
 
 function createLink(item: Item, icon: string | null, format: 'markdown' | 'org'): string {
@@ -37,6 +37,8 @@ declare global {
         filterOutNullable(): Array<NonNullable<T>>;
     }
 }
+
+export type Format = 'markdown' | 'org'
 
 Array.prototype.filterOutNullable = function () {
     return this.filter(v => typeof v !== 'undefined' && v !== null)

@@ -1,7 +1,7 @@
 import '@logseq/libs'
 import {ItemChooser} from './ItemChooser'
 import {itemsApiRequest} from './ItemsApi'
-import {insertItemToBlock, tokenize} from './utils'
+import {insertItemAtCursor, tokenize} from './utils'
 import {RateLimiter} from './RateLimiter'
 import {Item} from './Item'
 
@@ -35,7 +35,7 @@ function registerMovieCommand() {
                     }).filterOutNullable()
                 },
                 (item: Item) => {
-                    insertItemToBlock(block, item, icon)
+                    insertItemAtCursor(item, icon, block.format)
                 }
             )
         },
@@ -60,7 +60,7 @@ function registerAnimeCommand() {
                     return json['data'].map((d: any) => ({title: d.title, link: d.url}))
                 },
                 (item: Item) => {
-                    insertItemToBlock(block, item, icon)
+                    insertItemAtCursor(item, icon, block.format)
                 },
                 rateLimiter,
             )

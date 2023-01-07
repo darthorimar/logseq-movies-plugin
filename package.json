@@ -1,6 +1,6 @@
 {
   "name": "logseq-plugin-movies",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Logseq plugin that helps you insert your favorite anime and movie titles into your documents",
   "author": "Ilya Kirillov",
   "license": "MIT",

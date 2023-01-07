@@ -18,10 +18,19 @@ export function tokenize(text: string): string {
  * @param icon icon to before `Item` title
  */
 export async function insertItemToBlock(block: BlockEntity, item: Item, icon: string | null): Promise<void> {
-    const iconString = icon == null ? '' : icon + ' '
-    await logseq.Editor.updateBlock(block.uuid, block.content + `[${iconString}${item.title}](${item.link})`)
+    const link = createLink(item, icon, block.format)
+    await logseq.Editor.updateBlock(block.uuid, block.content + link)
 }
 
+function createLink(item: Item, icon: string | null, format: 'markdown' | 'org'): string {
+    const iconPrefix = icon == null ? '' : icon + ' '
+    switch (format) {
+    case 'markdown':
+        return `[${iconPrefix}${item.title}](${item.link})`
+    case 'org':
+        return `[[${item.link}][${iconPrefix}${item.title}]]`
+    }
+}
 
 declare global {
     export interface Array<T> {

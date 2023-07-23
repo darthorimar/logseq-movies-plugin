@@ -109,7 +109,7 @@ export class ItemChooser {
         const session = this.session
         if (!session) return
         const items = await session.getCompletionItems(this.ui.getInputField().value)
-        if (!items) return
+            .then((items) => !items ? [] : items)
         session.items = items
         this.ui.updateCompletionList(items)
         this.highlightActive()

@@ -24,6 +24,7 @@ export async function itemsApiRequest(
         title,
         icon,
         async (text: string) => {
+            if (!text) return null
             const url = buildUrl(text)
             const response: Response | null = rateLimiter == null
                 ? await fetch(url)

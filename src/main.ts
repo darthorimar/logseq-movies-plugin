@@ -28,6 +28,7 @@ function registerMovieCommand() {
                 (json) => {
                     return json['d'].map((d: any) => {
                         if (!d.id) return null
+                        if (![ 'movie', 'tvSeries', 'tvMiniSeries'].includes(d.qid)) return null
                         return {
                             title: d.l,
                             year: d.y,

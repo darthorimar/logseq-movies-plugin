@@ -30,6 +30,7 @@ function registerMovieCommand() {
                         if (!d.id) return null
                         return {
                             title: d.l,
+                            year: d.y,
                             link: `https://www.imdb.com/title/${d.id}`
                         }
                     }).filterOutNullable()
@@ -57,7 +58,7 @@ function registerAnimeCommand() {
                     return new URL(`https://api.jikan.moe/v4/anime?q=${query}&order_by=rating&sort=desc`)
                 },
                 (json) => {
-                    return json['data'].map((d: any) => ({title: d.title, link: d.url}))
+                    return json['data'].map((d: any) => ({title: d.title, link: d.url, year: null}))
                 },
                 (item: Item) => {
                     insertItemAtCursor(item, icon, block.format)

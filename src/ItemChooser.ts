@@ -124,8 +124,10 @@ export class ItemChooser {
 
 class ItemChooserUi {
     updateCompletionList(items: Item[]) {
-        this.getCompletionList().innerHTML = items.map((e: Item) =>
-            `<li class="list-item">${e.title}</li>`
+        this.getCompletionList().innerHTML = items.map((e: Item) => {
+                const yearString = e.year ? ` (${e.year})` : ''
+                return `<li class="list-item">${e.title}${yearString}</li>`
+            }
         ).join(' ')
     }
 

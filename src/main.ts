@@ -55,7 +55,7 @@ function registerAnimeCommand() {
                 'Anime Title', icon,
                 (text: string) => {
                     const query = encodeURIComponent(tokenize(text))
-                    return new URL(`https://api.jikan.moe/v4/anime?q=${query}&order_by=rating&sort=desc`)
+                    return new URL(`https://api.jikan.moe/v4/anime?q=${query}&order_by=score&sort=desc`)
                 },
                 (json) => {
                     return json['data'].map((d: any) => ({title: d.title, link: d.url, year: null}))

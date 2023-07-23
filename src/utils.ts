@@ -1,4 +1,3 @@
-import {BlockEntity} from '@logseq/libs/dist/LSPlugin'
 import {Item} from './Item'
 
 /**
@@ -22,6 +21,15 @@ export async function insertItemAtCursor(item: Item, icon: string | null, format
     await logseq.Editor.insertAtEditingCursor(link)
 }
 
+export function parseMyAnimeListYear(anime: any): string | null {
+    const aired = anime.aired
+    if (!aired) return null
+    const from = getYearFromDate(aired.from)
+    if (!from) return null
+    const to = getYearFromDate(aired.to)
+    return !to || from == to ? `${from}` : `${from} — ${to}`
+}
+
 function createLink(item: Item, icon: string | null, format: 'markdown' | 'org'): string {
     const iconPrefix = icon == null ? '' : icon + ' '
     switch (format) {
@@ -31,6 +39,18 @@ function createLink(item: Item, icon: string | null, format: 'markdown' | 'org')
         return `[[${item.link}][${iconPrefix}${item.title}]]`
     }
 }
+
+function getYearFromDate(date: string | null): number | null {
+    if (!date) return null
+    try {
+        const dateObject = new Date(date)
+        if (!dateObject) return null
+        return dateObject.getFullYear()
+    } catch (_) {
+        return null
+    }
+}
+
 
 declare global {
     export interface Array<T> {

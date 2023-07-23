@@ -1,7 +1,7 @@
 import '@logseq/libs'
 import {ItemChooser} from './ItemChooser'
 import {itemsApiRequest} from './ItemsApi'
-import {insertItemAtCursor, tokenize} from './utils'
+import {insertItemAtCursor, parseMyAnimeListYear, tokenize} from './utils'
 import {RateLimiter} from './RateLimiter'
 import {Item} from './Item'
 
@@ -58,7 +58,7 @@ function registerAnimeCommand() {
                     return new URL(`https://api.jikan.moe/v4/anime?q=${query}&order_by=score&sort=desc`)
                 },
                 (json) => {
-                    return json['data'].map((d: any) => ({title: d.title, link: d.url, year: null}))
+                    return json['data'].map((d: any) => ({title: d.title, link: d.url, year: parseMyAnimeListYear(d)}))
                 },
                 (item: Item) => {
                     insertItemAtCursor(item, icon, block.format)

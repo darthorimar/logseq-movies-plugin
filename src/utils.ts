@@ -21,8 +21,7 @@ export async function insertItemAtCursor(item: Item, icon: string | null, format
     await logseq.Editor.insertAtEditingCursor(link)
 }
 
-export function parseMyAnimeListYear(anime: any): string | null {
-    const aired = anime.aired
+export function parseMyAnimeListYear(aired: any | null): string | null {
     if (!aired) return null
     const from = getYearFromDate(aired.from)
     if (!from) return null

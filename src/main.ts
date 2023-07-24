@@ -59,7 +59,7 @@ function registerAnimeCommand() {
                     return new URL(`https://api.jikan.moe/v4/anime?q=${query}&order_by=score&sort=desc`)
                 },
                 (json) => {
-                    return json['data'].map((d: any) => ({title: d.title, link: d.url, year: parseMyAnimeListYear(d)}))
+                    return json['data'].map((d: any) => ({title: d.title, link: d.url, year: parseMyAnimeListYear(d.aired)}))
                 },
                 (item: Item) => {
                     insertItemAtCursor(item, icon, block.format)

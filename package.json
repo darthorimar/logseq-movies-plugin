@@ -8,13 +8,15 @@
   "scripts": {
     "dev": " webpack --mode=development",
     "build": "webpack --mode=production",
-    "test": " instant-mocha 'test/utils.test.ts' --mode=production"
+    "test": " instant-mocha 'test/*.test.ts' --mode=production"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.5",
     "@types/mocha": "^10.0.1",
     "@types/node": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.30.4",
     "@typescript-eslint/parser": "^5.30.4",
+    "chai": "^4.3.7",
     "eslint": "^8.19.0",
     "html-webpack-plugin": "^5.5.0",
     "instant-mocha": "^1.5.1",

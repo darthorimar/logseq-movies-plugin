@@ -33,14 +33,14 @@ export class RateLimiter {
      * Discards current action if currently enqueued
      */
     public discard() {
+        if (this.timer) {
+            clearInterval(this.timer)
+        }
         this.action?.discard()
         this.action = null
     }
 
     private refreshTimer() {
-        if (this.timer) {
-            clearInterval(this.timer)
-        }
         this.timer = setInterval(() => this.executeAction(), 1000 / this.queriesPerSec)
     }
 

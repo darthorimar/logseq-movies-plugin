@@ -11,7 +11,7 @@ name: Tests
 
 jobs:
   test:
-    name: tests
+    name: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-node@v3

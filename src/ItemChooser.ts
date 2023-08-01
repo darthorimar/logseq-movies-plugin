@@ -58,6 +58,7 @@ export class ItemChooser {
             activeItemIndex: 0,
             items: [],
             onSelected: onSelected,
+            onHidden: onHidden,
         }
         await updateThemeToCurrentUserStyle()
         await this.ui.show(title, icon)
@@ -118,7 +119,10 @@ export class ItemChooser {
     private hide() {
         logseq.hideMainUI({restoreEditingCursor: true})
         this.ui.reset()
-        this.session = null
+        if (!!this.session) {
+            this.session.onHidden()
+            this.session = null
+        }
     }
 }
 
@@ -176,4 +180,5 @@ interface ItemChooserSession {
     items: Item[],
     activeItemIndex: number,
     onSelected: (item: Item) => void,
+    onHidden: () => void,
 }

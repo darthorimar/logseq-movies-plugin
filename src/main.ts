@@ -2,7 +2,6 @@ import '@logseq/libs'
 import {ItemChooser} from './ItemChooser'
 import {itemsApiRequest} from './ItemsApi'
 import {insertItemAtCursor} from './utils'
-import {RateLimiter} from './RateLimiter'
 import {Item} from './Item'
 import {myAnimeListParserDefinition, imdbParserDefinition} from './ResourceParserDefinition'
 
@@ -33,7 +32,6 @@ function registerMovieCommand() {
 }
 
 function registerAnimeCommand() {
-    const rateLimiter = new RateLimiter(1)
     const icon = '🎬'
     logseq.Editor.registerSlashCommand(
         'Anime (MyAnimeList)', async () => {

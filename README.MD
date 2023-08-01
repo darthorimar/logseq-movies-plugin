@@ -1,5 +1,7 @@
 # Logseg Movies Plugin
 ![](https://img.shields.io/github/v/release/darthorimar/logseq-movies-plugin?style=flat-square)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/darthorimar/logseq-movies-plugin/test.yaml?style=flat-square)
+
 
 [Logseq](https://github.com/logseq/logseq) plugin that helps you insert your favorite anime and movie titles into your documents.
 

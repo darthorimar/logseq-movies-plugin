@@ -3,11 +3,13 @@ import {ItemChooser} from './ItemChooser'
 import {itemsApiRequest} from './ItemsApi'
 import {insertItemAtCursor} from './utils'
 import {Item} from './Item'
-import {myAnimeListParserDefinition, imdbParserDefinition} from './ResourceParserDefinition'
+import {imdbParserDefinition, myAnimeListParserDefinition} from './ResourceParserDefinition'
+import {settingSchema} from './settings'
 
 
 async function main() {
     await ItemChooser.instance.init()
+    logseq.useSettingsSchema(settingSchema)
 
     registerMovieCommand()
     registerAnimeCommand()
@@ -24,7 +26,7 @@ function registerMovieCommand() {
                 'Movie Title', icon,
                 imdbParserDefinition,
                 (item: Item) => {
-                    insertItemAtCursor(item, icon, block.format)
+                    insertItemAtCursor(item, 'movie', block.format)
                 }
             )
         },
@@ -42,7 +44,7 @@ function registerAnimeCommand() {
                 'Anime Title', icon,
                 myAnimeListParserDefinition,
                 (item: Item) => {
-                    insertItemAtCursor(item, icon, block.format)
+                    insertItemAtCursor(item, 'anime', block.format)
                 },
             )
         },

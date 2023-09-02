@@ -1,4 +1,6 @@
 import {Item} from './Item'
+import {applyLinkTemplate, LinkTemplateId} from './linkTemplates'
+import {getLinkTemplateByIdOrDefault} from './settings'
 
 /**
  * Remove all special chars from the text transforming it tho the space-separated list of words
@@ -13,11 +15,11 @@ export function tokenize(text: string): string {
 /**
  * Insert `Item` as a link inside a current block at cursor position
  * @param item item to insert into the block
- * @param icon icon to before `Item` title
+ * @param templateId template id to use for the inserted link text
  * @param format format of the link to insert, possible values are `markdown` and `org`
  */
-export async function insertItemAtCursor(item: Item, icon: string | null, format: Format): Promise<void> {
-    const link = createLink(item, icon, format)
+export async function insertItemAtCursor(item: Item, templateId: LinkTemplateId, format: Format): Promise<void> {
+    const link = createLink(item, templateId, format)
     await logseq.Editor.insertAtEditingCursor(link)
 }
 
@@ -29,13 +31,14 @@ export function parseMyAnimeListYear(aired: any | null): string | null {
     return !to || from == to ? `${from}` : `${from} — ${to}`
 }
 
-function createLink(item: Item, icon: string | null, format: 'markdown' | 'org'): string {
-    const iconPrefix = icon == null ? '' : icon + ' '
+function createLink(item: Item, templateId: LinkTemplateId, format: 'markdown' | 'org'): string {
+    const template = getLinkTemplateByIdOrDefault(templateId)
+    const linkText = applyLinkTemplate(template, item)
     switch (format) {
     case 'markdown':
-        return `[${iconPrefix}${item.title}](${item.link})`
+        return `[${linkText}](${item.link})`
     case 'org':
-        return `[[${item.link}][${iconPrefix}${item.title}]]`
+        return `[[${item.link}][${linkText}]]`
     }
 }
 

@@ -1,5 +1,5 @@
 export interface Item {
     title: string
-    link: string | null
+    link: string
     year: string
 }

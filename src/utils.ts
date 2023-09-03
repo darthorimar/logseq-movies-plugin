@@ -1,6 +1,6 @@
 import {Item} from './Item'
 import {LinkTemplateId} from './linkTemplates'
-import {createLink} from './links'
+import {createLinkByItem} from './links'
 
 /**
  * Remove all special chars from the text transforming it tho the space-separated list of words
@@ -19,7 +19,7 @@ export function tokenize(text: string): string {
  * @param format format of the link to insert, possible values are `markdown` and `org`
  */
 export async function insertItemAtCursor(item: Item, templateId: LinkTemplateId, format: Format): Promise<void> {
-    const link = createLink(item, templateId, format)
+    const link = createLinkByItem(item, templateId, format)
     await logseq.Editor.insertAtEditingCursor(link)
 }
 

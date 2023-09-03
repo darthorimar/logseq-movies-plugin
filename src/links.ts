@@ -2,13 +2,18 @@ import {Item} from './Item'
 import {applyLinkTemplate, LinkTemplateId} from './linkTemplates'
 import {getLinkTemplateByIdOrDefault} from './settings'
 
-export function createLink(item: Item, templateId: LinkTemplateId, format: 'markdown' | 'org'): string {
+export function createLinkByItem(item: Item, templateId: LinkTemplateId, format: 'markdown' | 'org'): string {
     const template = getLinkTemplateByIdOrDefault(templateId)
     const linkText = applyLinkTemplate(template, item)
+    const link = item.link
+    return createLink(format, linkText, link)
+}
+
+function createLink(format: 'markdown' | 'org', linkText: string, link: string) {
     switch (format) {
     case 'markdown':
-        return `[${linkText}](${item.link})`
+        return `[${linkText}](${link})`
     case 'org':
-        return `[[${item.link}][${linkText}]]`
+        return `[[${link}][${linkText}]]`
     }
 }

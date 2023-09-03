@@ -12,7 +12,7 @@ export function createLinkByItem(item: Item, templateId: LinkTemplateId, format:
 function createLink(format: 'markdown' | 'org', linkText: string, link: string) {
     switch (format) {
     case 'markdown':
-        return `[${linkText}](${link})`
+        return `[${linkText.replaceAll(']', '\\]')}](${link})`
     case 'org':
         return `[[${link}][${linkText}]]`
     }

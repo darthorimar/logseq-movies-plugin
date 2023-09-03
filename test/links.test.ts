@@ -52,4 +52,11 @@ describe('createLinkByItem test', () => {
         const actualOrg = createLinkByItem(anime.cowboyBebop, 'anime', 'org')
         assert.equal(actualOrg, '[[https://myanimelist.net/anime/1/Cowboy_Bebop][🎬 Cowboy Bebop]]')
     })
+
+    it('Should escape `]` in a link text', () => {
+        setLogseqPluginSettingsAnimeTemplate(undefined)
+
+        const actualMd = createLinkByItem({...anime.cowboyBebop, title: 'Cow]boy, Bebop]]'}, 'anime', 'markdown')
+        assert.equal(actualMd, '[🎬 Cow\\]boy, Bebop\\]\\]](https://myanimelist.net/anime/1/Cowboy_Bebop)')
+    })
 })

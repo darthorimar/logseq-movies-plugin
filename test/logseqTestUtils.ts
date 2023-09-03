@@ -9,3 +9,23 @@ export function resetLogseqPluginSettings() {
     // @ts-ignore
     global.logseq = undefined
 }
+
+export function setLogseqPluginSettingsMovieTemplate(template: string | undefined) {
+    updateLogseqPluginSettings({'link.text.movie': template})
+}
+
+export function setLogseqPluginSettingsAnimeTemplate(template: string | undefined) {
+    updateLogseqPluginSettings({'link.text.anime': template})
+}
+
+
+export function updateLogseqPluginSettings(settings: { [_ in SettingId]?: string | undefined }) {
+    if (!global.logseq?.settings) {
+        setLogseqPluginSettings(settings)
+    } else {
+        setLogseqPluginSettings({
+            ...global.logseq.settings,
+            ...settings
+        })
+    }
+}

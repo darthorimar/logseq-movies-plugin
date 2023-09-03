@@ -1,42 +1,43 @@
 import assert from 'assert'
-import {getLinkTemplateByIdOrDefault, SettingId} from '../src/settings'
+import {getLinkTemplateByIdOrDefault} from '../src/settings'
 import {defaultLinkTemplates} from '../src/linkTemplates'
+import {resetLogseqPluginSettings, setLogseqPluginSettings} from './logseqTestUtils'
 
 describe('getLinkTemplateByIdOrDefault test', () => {
-    afterEach(() => resetSettings())
+    afterEach(() => resetLogseqPluginSettings())
 
     it('Should get a template for movie', () => {
-        setSettings({'link.text.movie': 'Movie {title}, year: ${year}'})
+        setLogseqPluginSettings({'link.text.movie': 'Movie {title}, year: ${year}'})
         const actual = getLinkTemplateByIdOrDefault('movie')
         assert.equal(actual, 'Movie {title}, year: ${year}')
     })
 
     it('Should get a template for anime', () => {
-        setSettings({'link.text.anime': 'Anime {title}, year: ${year}'})
+        setLogseqPluginSettings({'link.text.anime': 'Anime {title}, year: ${year}'})
         const actual = getLinkTemplateByIdOrDefault('anime')
         assert.equal(actual, 'Anime {title}, year: ${year}')
     })
 
     it('Should get a default movie template for undefined settings', () => {
-        setSettings(undefined)
+        setLogseqPluginSettings(undefined)
         const actual = getLinkTemplateByIdOrDefault('movie')
         assert.equal(actual, defaultLinkTemplates['movie'])
     })
 
     it('Should get a default anime template for undefined settings', () => {
-        setSettings(undefined)
+        setLogseqPluginSettings(undefined)
         const actual = getLinkTemplateByIdOrDefault('anime')
         assert.equal(actual, defaultLinkTemplates['anime'])
     })
 
     it('Should get a default movie template for undefined specific setting', () => {
-        setSettings({'link.text.movie': undefined})
+        setLogseqPluginSettings({'link.text.movie': undefined})
         const actual = getLinkTemplateByIdOrDefault('movie')
         assert.equal(actual, defaultLinkTemplates['movie'])
     })
 
     it('Should get a default anime template for undefined specific setting', () => {
-        setSettings({'link.text.anime': undefined})
+        setLogseqPluginSettings({'link.text.anime': undefined})
         const actual = getLinkTemplateByIdOrDefault('anime')
         assert.equal(actual, defaultLinkTemplates['anime'])
     })
@@ -44,12 +45,3 @@ describe('getLinkTemplateByIdOrDefault test', () => {
 
 
 
-function setSettings(settings: { [_ in SettingId]?: string | undefined } | undefined) {
-    // @ts-ignore
-    global.logseq = {settings: settings}
-}
-
-function resetSettings() {
-    // @ts-ignore
-    global.logseq = undefined
-}

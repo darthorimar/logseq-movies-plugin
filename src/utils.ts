@@ -1,6 +1,6 @@
 import {Item} from './Item'
-import {applyLinkTemplate, LinkTemplateId} from './linkTemplates'
-import {getLinkTemplateByIdOrDefault} from './settings'
+import {LinkTemplateId} from './linkTemplates'
+import {createLink} from './links'
 
 /**
  * Remove all special chars from the text transforming it tho the space-separated list of words
@@ -29,17 +29,6 @@ export function parseMyAnimeListYear(aired: any | null): string | null {
     if (!from) return null
     const to = getYearFromDate(aired.to)
     return !to || from == to ? `${from}` : `${from} — ${to}`
-}
-
-function createLink(item: Item, templateId: LinkTemplateId, format: 'markdown' | 'org'): string {
-    const template = getLinkTemplateByIdOrDefault(templateId)
-    const linkText = applyLinkTemplate(template, item)
-    switch (format) {
-    case 'markdown':
-        return `[${linkText}](${item.link})`
-    case 'org':
-        return `[[${item.link}][${linkText}]]`
-    }
 }
 
 function getYearFromDate(date: string | null): number | null {

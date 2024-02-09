@@ -6,7 +6,9 @@ import {
 } from '../src/ResourceParserDefinition'
 import {expect} from 'chai'
 
-describe('imdb parser test', () => {
+describe('imdb parser test', function() {
+    this.timeout(10_000) // to avoid the `Timeout of 2000ms exceeded` error on network calls
+
     it('Should search for the movie by name', async () => {
          await withParser(imdbParserDefinition, async parser => {
              let result = await parser.parse('lord of the rings')
@@ -20,7 +22,9 @@ describe('imdb parser test', () => {
     })
 })
 
-describe('myAnimeList parser test', () => {
+describe('myAnimeList parser test', function() {
+    this.timeout(10_000) // to avoid the `Timeout of 2000ms exceeded` error on network calls
+
     it('Should search for the anime by name', async () => {
         await withParser(myAnimeListParserDefinition, async parser => {
             let result = await parser.parse('naruto')
